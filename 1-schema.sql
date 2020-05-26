@@ -789,6 +789,8 @@ ALTER SEQUENCE public.dev_nonce_id_seq OWNED BY public.dev_nonce.id;
 CREATE TABLE public.device (
     id bigint NOT NULL,
     dev_eui character varying(16) NOT NULL,
+	"name" varchar NULL,
+	vendor varchar NULL,
     join_eui character varying(16),
     organization_id bigint NOT NULL,
     first_up_timestamp timestamp with time zone,
@@ -976,6 +978,8 @@ ALTER TABLE public.device_to_organization OWNER TO postgres;
 CREATE TABLE public.gateway (
     id bigint NOT NULL,
     gw_hex_id character varying(16),
+	"name" varchar NULL,
+	vendor varchar NULL,
     location_latitude double precision,
     location_longitude double precision,
 	data_collector_id bigint NOT NULL,
