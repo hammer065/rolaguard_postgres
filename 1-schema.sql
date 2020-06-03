@@ -791,6 +791,7 @@ CREATE TABLE public.device (
     dev_eui character varying(16) NOT NULL,
 	"name" varchar NULL,
 	vendor varchar NULL,
+    app_name varchar NULL,
     join_eui character varying(16),
     organization_id bigint NOT NULL,
     first_up_timestamp timestamp with time zone,
@@ -1519,6 +1520,7 @@ ALTER SEQUENCE public.packet_id_seq OWNED BY public.packet.id;
 -- TOC entry 385 (class 1259 OID 26494)
 -- Name: params; Type: TABLE; Schema: public; Owner: postgres
 --
+
 
 CREATE TABLE public.params (
     id integer NOT NULL,
