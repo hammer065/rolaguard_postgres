@@ -3618,3 +3618,12 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 -- PostgreSQL database dump complete
 --
 
+-- Changes from version 1.2.0
+
+ALTER TABLE public.device ADD app_name varchar NULL;
+ALTER TABLE public.device ADD name varchar NULL;
+ALTER TABLE public.device ADD vendor varchar NULL;
+ALTER TABLE public.gateway ADD "name" varchar NULL;
+ALTER TABLE public.gateway ADD vendor varchar NULL;
+ALTER TABLE public.gateway ALTER column gw_hex_id type varchar(100);
+
