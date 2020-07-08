@@ -3620,10 +3620,53 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 
 -- Changes from version 1.2.0
 
-ALTER TABLE public.device ADD app_name varchar NULL;
-ALTER TABLE public.device ADD name varchar NULL;
-ALTER TABLE public.device ADD vendor varchar NULL;
-ALTER TABLE public.gateway ADD "name" varchar NULL;
-ALTER TABLE public.gateway ADD vendor varchar NULL;
 ALTER TABLE public.gateway ALTER column gw_hex_id type varchar(100);
 
+
+-- Changes from version 1.3.0
+
+begin transaction;
+
+CREATE TABLE public.tag (
+	id serial8 NOT NULL,
+	organization_id int8 NOT NULL,
+	"name" varchar NOT NULL,
+	color char(8) NOT NULL,
+	CONSTRAINT tag_pk PRIMARY KEY (id)
+);
+
+CREATE TABLE public.device_tag (
+	device_id int8 NOT NULL,
+	tag_id int8 NOT NULL
+);
+
+ALTER TABLE public.device_tag 
+    ADD CONSTRAINT device_tag_pk PRIMARY KEY (device_id,tag_id);
+
+ALTER TABLE ONLY public.device_tag
+	ADD CONSTRAINT device_tag_fk_1 FOREIGN KEY (device_id) REFERENCES public.device(id);
+
+ALTER TABLE ONLY public.device_tag
+	ADD CONSTRAINT device_tag_fk_2 FOREIGN KEY (tag_id) REFERENCES public.tag(id);
+
+ALTER TABLE ONLY public.tag
+    ADD CONSTRAINT tag_organization_id_fkey FOREIGN KEY (organization_id) REFERENCES public.organization(id);
+    
+
+CREATE TABLE public.gateway_tag (
+	gateway_id int8 NOT NULL,
+	tag_id int8 NOT NULL
+);
+
+ALTER TABLE public.gateway_tag 
+    ADD CONSTRAINT gateway_tag_pk PRIMARY KEY (gateway_id,tag_id);
+
+ALTER TABLE ONLY public.gateway_tag
+	ADD CONSTRAINT gateway_tag_fk_1 FOREIGN KEY (gateway_id) REFERENCES public.gateway(id);
+
+ALTER TABLE ONLY public.gateway_tag
+	ADD CONSTRAINT gateway_tag_fk_2 FOREIGN KEY (tag_id) REFERENCES public.tag(id);
+
+commit;
+
+CREATE UNIQUE INDEX device_vendor_prefix_prefix_idx ON public.device_vendor_prefix (prefix);
