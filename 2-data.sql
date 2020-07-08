@@ -5444,7 +5444,6 @@ INSERT INTO public.device_vendor_prefix (prefix, vendor) VALUES ('080043', 'PIXE
 INSERT INTO public.device_vendor_prefix (prefix, vendor) VALUES ('080045', 'CONCURRENT COMPUTER CORP.');
 INSERT INTO public.device_vendor_prefix (prefix, vendor) VALUES ('080078', 'ACCELL CORPORATION');
 INSERT INTO public.device_vendor_prefix (prefix, vendor) VALUES ('08006D', 'WHITECHAPEL COMPUTER WORKS');
-INSERT INTO public.device_vendor_prefix (prefix, vendor) VALUES ('080030', 'NETWORK RESEARCH CORPORATION');
 INSERT INTO public.device_vendor_prefix (prefix, vendor) VALUES ('080031', 'LITTLE MACHINES INC.');
 INSERT INTO public.device_vendor_prefix (prefix, vendor) VALUES ('08002E', 'METAPHOR COMPUTER SYSTEMS');
 INSERT INTO public.device_vendor_prefix (prefix, vendor) VALUES ('080056', 'STANFORD LINEAR ACCEL. CENTER');
@@ -27490,7 +27489,6 @@ INSERT INTO public.device_vendor_prefix (prefix, vendor) VALUES ('080015', 'STC 
 INSERT INTO public.device_vendor_prefix (prefix, vendor) VALUES ('080042', 'JAPAN MACNICS CORP.');
 INSERT INTO public.device_vendor_prefix (prefix, vendor) VALUES ('080066', 'AGFA CORPORATION');
 INSERT INTO public.device_vendor_prefix (prefix, vendor) VALUES ('080004', 'CROMEMCO INCORPORATED');
-INSERT INTO public.device_vendor_prefix (prefix, vendor) VALUES ('0001C8', 'CONRAD CORP.');
 INSERT INTO public.device_vendor_prefix (prefix, vendor) VALUES ('08003F', 'FRED KOSCHARA ENTERPRISES');
 INSERT INTO public.device_vendor_prefix (prefix, vendor) VALUES ('08000B', 'UNISYS CORPORATION');
 INSERT INTO public.device_vendor_prefix (prefix, vendor) VALUES ('00DD01', 'UNGERMANN-BASS INC.');
@@ -27504,7 +27502,6 @@ INSERT INTO public.device_vendor_prefix (prefix, vendor) VALUES ('00003E', 'SIMP
 INSERT INTO public.device_vendor_prefix (prefix, vendor) VALUES ('00DD02', 'UNGERMANN-BASS INC.');
 INSERT INTO public.device_vendor_prefix (prefix, vendor) VALUES ('00DD04', 'UNGERMANN-BASS INC.');
 INSERT INTO public.device_vendor_prefix (prefix, vendor) VALUES ('026086', 'LOGIC REPLACEMENT TECH. LTD.');
-INSERT INTO public.device_vendor_prefix (prefix, vendor) VALUES ('080030', 'CERN');
 INSERT INTO public.device_vendor_prefix (prefix, vendor) VALUES ('74DA88', 'TP-LINK TECHNOLOGIES CO.,LTD.');
 INSERT INTO public.device_vendor_prefix (prefix, vendor) VALUES ('CC32E5', 'TP-LINK TECHNOLOGIES CO.,LTD.');
 INSERT INTO public.device_vendor_prefix (prefix, vendor) VALUES ('1C3BF3', 'TP-LINK TECHNOLOGIES CO.,LTD.');
