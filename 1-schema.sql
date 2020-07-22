@@ -3670,3 +3670,13 @@ ALTER TABLE ONLY public.gateway_tag
 commit;
 
 CREATE UNIQUE INDEX device_vendor_prefix_prefix_idx ON public.device_vendor_prefix (prefix);
+
+-- Feature/resource_usage
+
+ALTER TABLE public.device ADD npackets_up int8 NULL DEFAULT 0;
+ALTER TABLE public.device ADD npackets_down int8 NULL DEFAULT 0;
+ALTER TABLE public.device ADD npackets_lost int8 NULL DEFAULT 0;
+
+ALTER TABLE public.gateway ADD npackets_up int8 NULL DEFAULT 0;
+ALTER TABLE public.gateway ADD npackets_down int8 NULL DEFAULT 0;
+ALTER TABLE public.gateway ADD npackets_lost int8 NULL DEFAULT 0;
