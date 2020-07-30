@@ -34640,3 +34640,12 @@ SELECT pg_catalog.setval('public.row_processed_id_seq', 3, true);
 -- PostgreSQL database dump complete
 --
 
+-- Fix/missing notification preferences (V1.3)
+
+INSERT INTO notification_preferences
+(user_id, sms, push, email)
+VALUES(2, false, true, false);
+
+INSERT INTO notification_alert_settings
+(user_id, high, medium, low, info)
+VALUES(2, true, true, false, false);
