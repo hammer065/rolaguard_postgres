@@ -34642,10 +34642,6 @@ SELECT pg_catalog.setval('public.row_processed_id_seq', 3, true);
 
 -- Fix/missing notification preferences (V1.3)
 
-INSERT INTO notification_preferences
-(user_id, sms, push, email)
-VALUES(2, false, true, false);
-
-INSERT INTO notification_alert_settings
-(user_id, high, medium, low, info)
-VALUES(2, true, true, false, false);
+INSERT INTO public.notification_preferences (user_id, sms, push, email) VALUES(2, false, true, false);
+INSERT INTO public.notification_alert_settings (user_id, high, medium, low, info) VALUES(2, true, true, false, false);
+INSERT INTO public.notification_data_collector_settings (enabled, user_id, data_collector_id) VALUES(true, 2, 1);
