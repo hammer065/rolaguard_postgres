@@ -70,22 +70,22 @@ INSERT INTO alert_type (id, code, "name", message, risk, description, parameters
 INSERT INTO alert_type (id, code, "name", message, risk, description, parameters, technical_description, recommended_action, quarantine_timeout) VALUES(35, 'LAF-601', 'Device manually removed from quarantine', 'Device {dev_eui} (device name: {dev_name}, device vendor: {dev_vendor}) removed from quarantine by the user {user_id} on {date}.', 'INFO', 'A device has been removed from quarantine.', '{}', 'A device was removed from quarantine by an user.', '', 0);
 
 -- Policy --
-INSERT INTO public.policy (id, name, organization_id, is_default) VALUES (1, 'Default', NULL, true);
+INSERT INTO public.policy (name, organization_id, is_default) VALUES ('Default', NULL, true);
 
 -- Policy Item --
-INSERT INTO public.policy_item (id, parameters, enabled, policy_id, alert_type_code) VALUES (1, '{}', true, 1, 'LAF-001');
-INSERT INTO public.policy_item (id, parameters, enabled, policy_id, alert_type_code) VALUES (2, '{}', false, 1, 'LAF-002');
-INSERT INTO public.policy_item (id, parameters, enabled, policy_id, alert_type_code) VALUES (3, '{}', true, 1, 'LAF-006');
-INSERT INTO public.policy_item (id, parameters, enabled, policy_id, alert_type_code) VALUES (4, '{}', true, 1, 'LAF-007');
-INSERT INTO public.policy_item (id, parameters, enabled, policy_id, alert_type_code) VALUES (5, '{}', true, 1, 'LAF-009');
-INSERT INTO public.policy_item (id, parameters, enabled, policy_id, alert_type_code) VALUES (6, '{"location_accuracy":20}', true, 1, 'LAF-010');
-INSERT INTO public.policy_item (id, parameters, enabled, policy_id, alert_type_code) VALUES (7, '{}', true, 1, 'LAF-011');
-INSERT INTO public.policy_item (id, parameters, enabled, policy_id, alert_type_code) VALUES (8, '{}', true, 1, 'LAF-400');
-INSERT INTO public.policy_item (id, parameters, enabled, policy_id, alert_type_code) VALUES (9, '{}', true, 1, 'LAF-401');
+INSERT INTO public.policy_item (parameters, enabled, policy_id, alert_type_code) VALUES ('{}', true, 1, 'LAF-001');
+INSERT INTO public.policy_item (parameters, enabled, policy_id, alert_type_code) VALUES ('{}', false, 1, 'LAF-002');
+INSERT INTO public.policy_item (parameters, enabled, policy_id, alert_type_code) VALUES ('{}', true, 1, 'LAF-006');
+INSERT INTO public.policy_item (parameters, enabled, policy_id, alert_type_code) VALUES ('{}', true, 1, 'LAF-007');
+INSERT INTO public.policy_item (parameters, enabled, policy_id, alert_type_code) VALUES ('{}', true, 1, 'LAF-009');
+INSERT INTO public.policy_item (parameters, enabled, policy_id, alert_type_code) VALUES ('{"location_accuracy":20}', true, 1, 'LAF-010');
+INSERT INTO public.policy_item (parameters, enabled, policy_id, alert_type_code) VALUES ('{}', true, 1, 'LAF-011');
+INSERT INTO public.policy_item (parameters, enabled, policy_id, alert_type_code) VALUES ('{}', true, 1, 'LAF-400');
+INSERT INTO public.policy_item (parameters, enabled, policy_id, alert_type_code) VALUES ('{}', true, 1, 'LAF-401');
 
 -- Data Collector
-INSERT INTO public.data_collector(id, data_collector_type_id, name, description, created_at, ip, port, "user", password, ssl, organization_id, deleted_at, policy_id, status, gateway_id, verified)
-VALUES(1, 1, 'Chirpstack.io Test', 'Chirpstack.io Test Open Server', '2020-03-01 12:40:52.306', '182.48.244.13', '1883', NULL, NULL, false, 4, NULL, 1, 'CONNECTED', NULL, true);
+INSERT INTO public.data_collector(data_collector_type_id, name, description, created_at, ip, port, "user", password, ssl, organization_id, deleted_at, policy_id, status, gateway_id, verified)
+VALUES(1, 'Chirpstack.io Test', 'Chirpstack.io Test Open Server', '2020-03-01 12:40:52.306', '182.48.244.13', '1883', NULL, NULL, false, 4, NULL, 1, 'CONNECTED', NULL, true);
 
 
 --
