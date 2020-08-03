@@ -34645,3 +34645,7 @@ SELECT pg_catalog.setval('public.row_processed_id_seq', 3, true);
 INSERT INTO public.notification_preferences (user_id, sms, push, email) VALUES(2, false, true, false);
 INSERT INTO public.notification_alert_settings (user_id, high, medium, low, info) VALUES(2, true, true, false, false);
 INSERT INTO public.notification_data_collector_settings (enabled, user_id, data_collector_id) VALUES(true, 2, 1);
+
+
+-- Feature/ filter notification by asset importance (v1.4)
+INSERT INTO public.notification_asset_importance (user_id, high, medium, low) VALUES(2, true, true, false);
