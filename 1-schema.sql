@@ -3687,3 +3687,13 @@ CREATE TABLE public.notification_asset_importance (
 	low bool NOT NULL,
 	CONSTRAINT notification_asset_importance_fk FOREIGN KEY (user_id) REFERENCES public.iot_user(id)
 );
+
+-- Notification asset tag table
+
+CREATE TABLE public.notification_asset_tag (
+	user_id int8 NOT NULL,
+	tag_id int8 NOT NULL,
+    CONSTRAINT notification_asset_tag_fk_1 FOREIGN KEY (user_id) REFERENCES public.iot_user(id),
+    CONSTRAINT notification_asset_tag_fk_2 FOREIGN KEY (tag_id) REFERENCES public.tag(id),
+    CONSTRAINT notification_asset_tag_pk PRIMARY KEY (user_id,tag_id)
+);
