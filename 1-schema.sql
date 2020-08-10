@@ -3672,6 +3672,13 @@ commit;
 CREATE UNIQUE INDEX device_vendor_prefix_prefix_idx ON public.device_vendor_prefix (prefix);
 
 -- Changes from version 1.4
+-- Asset importance
+
+CREATE TYPE public.asset_importance AS ENUM ('LOW', 'MEDIUM', 'HIGH');
+
+ALTER TABLE public.device ADD importance public.asset_importance NOT NULL DEFAULT 'MEDIUM';
+
+ALTER TABLE public.gateway ADD importance public.asset_importance NOT NULL DEFAULT 'MEDIUM';
 
 CREATE TABLE public.notification_asset_importance (
 	user_id int8 NOT NULL,
@@ -3680,4 +3687,3 @@ CREATE TABLE public.notification_asset_importance (
 	low bool NOT NULL,
 	CONSTRAINT notification_asset_importance_fk FOREIGN KEY (user_id) REFERENCES public.iot_user(id)
 );
-
