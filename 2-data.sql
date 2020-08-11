@@ -34648,11 +34648,11 @@ VALUES('{"minimum_rssi":-120}', true, 1, 'LAF-100');
 
 INSERT INTO alert_type
 (code, "name", message, risk, description, parameters, technical_description, recommended_action, quarantine_timeout)
-VALUES('LAF-101', 'Device losing many packets', 'The device {dev_eui} (device name: {dev_name}, device vendor: {dev_vendor}) has joined the network. Application: {join_eui} There are {number_of_devices} devices connected in this data collector. Message ID received {packet_id} on {packet_date} from gateway {gateway} (gateway name: {gw_name}, gw_vendor: {gw_vendor}. {packets_lost} Alert generated on {created_at}.', 'LOW', 'The device is losing more packets than the threshold set in the policy.', '{"max_lost_packets": {"type": "Float", "default": 8, "maximum": 128, "minimum": 1, "description": "Maximum number of packets lost, if more packets are lost an alert is emitted."}}', 'There is a problem in the link, many packets of this devices are lossed.', 'This could be caused by a low signal strength. Try to get the device and the gateway closer. If this is not possible, consider add another gateway to increase the coverage.', 3600);
+VALUES('LAF-101', 'Device losing many packets', 'The device {dev_eui} (device name: {dev_name}, device vendor: {dev_vendor}) has joined the network. Application: {join_eui} There are {number_of_devices} devices connected in this data collector. Message ID received {packet_id} on {packet_date} from gateway {gateway} (gateway name: {gw_name}, gw_vendor: {gw_vendor}. {packets_lost} Alert generated on {created_at}.', 'LOW', 'The device is losing more packets than the threshold set in the policy.', '{"max_lost_packets": {"type": "Float", "default": 360, "maximum": 10000000, "minimum": 1, "description": "Maximum number of time lossing packets, if packets are lost for a period longer than this an alert is emitted."}}', 'There is a problem in the link, many packets of this devices are lossed.', 'This could be caused by a low signal strength. Try to get the device and the gateway closer. If this is not possible, consider add another gateway to increase the coverage.', 3600);
 
 INSERT INTO policy_item
 (parameters, enabled, policy_id, alert_type_code)
-VALUES('{"max_lost_packets":8}', true, 1, 'LAF-100');
+VALUES('{"max_lost_packets":360}', true, 1, 'LAF-101');
 
 --
 -- PostgreSQL database dump complete
