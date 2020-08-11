@@ -3676,6 +3676,7 @@ CREATE UNIQUE INDEX device_vendor_prefix_prefix_idx ON public.device_vendor_pref
 ALTER TABLE public.device ADD npackets_up int8 NOT NULL DEFAULT 0;
 ALTER TABLE public.device ADD npackets_down int8 NOT NULL DEFAULT 0;
 ALTER TABLE public.device ADD npackets_lost float8 NOT NULL DEFAULT 0;
+ALTER TABLE public.device ADD max_rssi float8 NULL;
 
 ALTER TABLE public.gateway ADD npackets_up int8 NOT NULL DEFAULT 0;
 ALTER TABLE public.gateway ADD npackets_down int8 NOT NULL DEFAULT 0;
