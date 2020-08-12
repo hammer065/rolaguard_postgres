@@ -3697,3 +3697,15 @@ CREATE TABLE public.notification_asset_tag (
     CONSTRAINT notification_asset_tag_fk_2 FOREIGN KEY (tag_id) REFERENCES public.tag(id),
     CONSTRAINT notification_asset_tag_pk PRIMARY KEY (user_id,tag_id)
 );
+-- Feature/resource_usage
+
+ALTER TABLE public.device ADD npackets_up int8 NOT NULL DEFAULT 0;
+ALTER TABLE public.device ADD npackets_down int8 NOT NULL DEFAULT 0;
+ALTER TABLE public.device ADD npackets_lost float8 NOT NULL DEFAULT 0;
+ALTER TABLE public.device ADD max_rssi float8 NULL;
+
+ALTER TABLE public.gateway ADD npackets_up int8 NOT NULL DEFAULT 0;
+ALTER TABLE public.gateway ADD npackets_down int8 NOT NULL DEFAULT 0;
+
+-- Convert last_activity column in resource_usage to timestamptz
+ALTER TABLE public.gateway ALTER COLUMN last_activity TYPE timestamptz(0) USING last_activity::timestamptz;

@@ -4,11 +4,11 @@ insert into public.organization (id, name, country, region) values (4, 'Communit
 
 -- User --
 -- orchestrator -- (user.orchestrator/rolaguard_password)
-insert into public.iot_user (id, username, email, full_name, password, organization_id, phone, active, deleted, blocked)
-values (1, 'user.orchestrator', 'user_orchestrator@your_host.com', 'Orchestrator User','$2b$12$vyJjHtINa1pMIbIamYo9xOgYKxQ20PvejNAYuQakh2ihBdX84Zqbm', 3, '3431111111', true, false, false);
+insert into public.iot_user (username, email, full_name, password, organization_id, phone, active, deleted, blocked)
+values ('user.orchestrator', 'user_orchestrator@your_host.com', 'Orchestrator User','$2b$12$vyJjHtINa1pMIbIamYo9xOgYKxQ20PvejNAYuQakh2ihBdX84Zqbm', 3, '3431111111', true, false, false);
 -- admin -- (admin/admin)
-insert into public.iot_user (id, username, email, full_name, password, organization_id, phone, active, deleted, blocked)
-values (2, 'admin', 'admin@your_host.com', 'Preloaded Admin User','$2b$12$Z5vPo9nm9Lj2fszLoqrxFeSVwNBSWH9RLutm7btRl5MWdhPczUcsa', 4, '3431111111', true, false, false);
+insert into public.iot_user (username, email, full_name, password, organization_id, phone, active, deleted, blocked)
+values ('admin', 'admin@your_host.com', 'Preloaded Admin User','$2b$12$Z5vPo9nm9Lj2fszLoqrxFeSVwNBSWH9RLutm7btRl5MWdhPczUcsa', 4, '3431111111', true, false, false);
 
 -- User Roles --
 insert into public.user_role(id, role_name)
@@ -34526,109 +34526,127 @@ INSERT INTO public.row_processed (id, last_row, analyzer) VALUES (2, 0, 'packet_
 -- Name: alert_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.alert_id_seq', 106, true);
+-- SELECT pg_catalog.setval('public.alert_id_seq', 106, true);
 
 
---
--- TOC entry 3068 (class 0 OID 0)
--- Dependencies: 199
--- Name: alert_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
+-- --
+-- -- TOC entry 3068 (class 0 OID 0)
+-- -- Dependencies: 199
+-- -- Name: alert_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- --
 
-SELECT pg_catalog.setval('public.alert_type_id_seq', 10, true);
-
-
---
--- TOC entry 3069 (class 0 OID 0)
--- Dependencies: 201
--- Name: app_key_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.app_key_id_seq', 1, false);
+-- SELECT pg_catalog.setval('public.alert_type_id_seq', 32, true);
 
 
---
--- TOC entry 3070 (class 0 OID 0)
--- Dependencies: 203
--- Name: data_collector_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
+-- --
+-- -- TOC entry 3069 (class 0 OID 0)
+-- -- Dependencies: 201
+-- -- Name: app_key_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- --
 
-SELECT pg_catalog.setval('public.data_collector_id_seq', 1, true);
-
-
---
--- TOC entry 3071 (class 0 OID 0)
--- Dependencies: 207
--- Name: dev_nonce_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.dev_nonce_id_seq', 1733, true);
+-- SELECT pg_catalog.setval('public.app_key_id_seq', 1, false);
 
 
---
--- TOC entry 3072 (class 0 OID 0)
--- Dependencies: 210
--- Name: device_auth_data_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
+-- --
+-- -- TOC entry 3070 (class 0 OID 0)
+-- -- Dependencies: 203
+-- -- Name: data_collector_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- --
 
-SELECT pg_catalog.setval('public.device_auth_data_id_seq', 1, false);
-
-
---
--- TOC entry 3073 (class 0 OID 0)
--- Dependencies: 211
--- Name: device_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.device_id_seq', 23, true);
+-- SELECT pg_catalog.setval('public.data_collector_id_seq', 1, true);
 
 
---
--- TOC entry 3074 (class 0 OID 0)
--- Dependencies: 213
--- Name: device_session_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
+-- --
+-- -- TOC entry 3071 (class 0 OID 0)
+-- -- Dependencies: 207
+-- -- Name: dev_nonce_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- --
 
-SELECT pg_catalog.setval('public.device_session_id_seq', 26, true);
-
-
---
--- TOC entry 3075 (class 0 OID 0)
--- Dependencies: 215
--- Name: gateway_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.gateway_id_seq', 1, false);
+-- SELECT pg_catalog.setval('public.dev_nonce_id_seq', 1733, true);
 
 
---
--- TOC entry 3076 (class 0 OID 0)
--- Dependencies: 219
--- Name: organization_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
+-- --
+-- -- TOC entry 3072 (class 0 OID 0)
+-- -- Dependencies: 210
+-- -- Name: device_auth_data_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- --
 
-SELECT pg_catalog.setval('public.organization_id_seq', 1, true);
-
-
---
--- TOC entry 3077 (class 0 OID 0)
--- Dependencies: 221
--- Name: packet_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.packet_id_seq', 12000, true);
+-- SELECT pg_catalog.setval('public.device_auth_data_id_seq', 1, false);
 
 
---
--- TOC entry 3078 (class 0 OID 0)
--- Dependencies: 223
--- Name: row_processed_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
+-- --
+-- -- TOC entry 3073 (class 0 OID 0)
+-- -- Dependencies: 211
+-- -- Name: device_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- --
 
-SELECT pg_catalog.setval('public.row_processed_id_seq', 3, true);
+-- SELECT pg_catalog.setval('public.device_id_seq', 23, true);
+
+
+-- --
+-- -- TOC entry 3074 (class 0 OID 0)
+-- -- Dependencies: 213
+-- -- Name: device_session_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- --
+
+-- SELECT pg_catalog.setval('public.device_session_id_seq', 26, true);
+
+
+-- --
+-- -- TOC entry 3075 (class 0 OID 0)
+-- -- Dependencies: 215
+-- -- Name: gateway_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- --
+
+-- SELECT pg_catalog.setval('public.gateway_id_seq', 1, false);
+
+
+-- --
+-- -- TOC entry 3076 (class 0 OID 0)
+-- -- Dependencies: 219
+-- -- Name: organization_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- --
+
+-- SELECT pg_catalog.setval('public.organization_id_seq', 1, true);
+
+
+-- --
+-- -- TOC entry 3077 (class 0 OID 0)
+-- -- Dependencies: 221
+-- -- Name: packet_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- --
+
+-- SELECT pg_catalog.setval('public.packet_id_seq', 12000, true);
+
+
+-- --
+-- -- TOC entry 3078 (class 0 OID 0)
+-- -- Dependencies: 223
+-- -- Name: row_processed_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- --
+
+-- SELECT pg_catalog.setval('public.row_processed_id_seq', 3, true);
 
 
 -- Completed on 2019-05-16 15:53:30 UTC
+
+
+--  Resource usage alerts
+INSERT INTO alert_type
+(code, "name", message, risk, description, parameters, technical_description, recommended_action, quarantine_timeout)
+VALUES('LAF-100', 'Device signal intensity below threshold', 'The device {dev_eui} (device name: {dev_name}, device vendor: {dev_vendor}) has joined the network. Application: {join_eui} There are {number_of_devices} devices connected in this data collector. Message ID received {packet_id} on {packet_date} from gateway {gateway} (gateway name: {gw_name}, gw_vendor: {gw_vendor}. {rssi} Alert generated on {created_at}.', 'LOW', 'A packet from this device was received with an signal strength below the threshold set in the policy.', '{"minimum_rssi": {"type": "Float", "default": -120, "maximum": 0, "minimum": -132, "description": "Minimum RSSI accepted, if the signal strength is lower an alert is emitted."}}', 'The signal strength of the device is too low, this can cause packet losing, duplicate packets and faster battery draining.', 'Try to get the device and the gateway closer. If this is not possible, consider add another gateway to increase the coverage.', 3600);
+
+INSERT INTO policy_item
+(parameters, enabled, policy_id, alert_type_code)
+VALUES('{"minimum_rssi":-120}', true, 1, 'LAF-100');
+
+INSERT INTO alert_type
+(code, "name", message, risk, description, parameters, technical_description, recommended_action, quarantine_timeout)
+VALUES('LAF-101', 'Device losing many packets', 'The device {dev_eui} (device name: {dev_name}, device vendor: {dev_vendor}) has joined the network. Application: {join_eui} There are {number_of_devices} devices connected in this data collector. Message ID received {packet_id} on {packet_date} from gateway {gateway} (gateway name: {gw_name}, gw_vendor: {gw_vendor}. {packets_lost} Alert generated on {created_at}.', 'LOW', 'The device is losing more packets than the threshold set in the policy.', '{"max_lost_packets": {"type": "Float", "default": 360, "maximum": 10000000, "minimum": 1, "description": "Maximum number of time lossing packets, if packets are lost for a period longer than this an alert is emitted."}}', 'There is a problem in the link, many packets of this devices are lossed.', 'This could be caused by a low signal strength. Try to get the device and the gateway closer. If this is not possible, consider add another gateway to increase the coverage.', 3600);
+
+INSERT INTO policy_item
+(parameters, enabled, policy_id, alert_type_code)
+VALUES('{"max_lost_packets":360}', true, 1, 'LAF-101');
 
 --
 -- PostgreSQL database dump complete
