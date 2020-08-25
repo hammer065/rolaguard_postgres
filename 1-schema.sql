@@ -665,50 +665,6 @@ ALTER TABLE public.data_collector_log_event_id_seq OWNER TO postgres;
 ALTER SEQUENCE public.data_collector_log_event_id_seq OWNED BY public.data_collector_log_event.id;
 
 
---
--- TOC entry 324 (class 1259 OID 19525)
--- Name: data_collector_to_device; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.data_collector_to_device (
-    data_collector_id bigint NOT NULL,
-    device_id bigint NOT NULL
-);
-
-
-ALTER TABLE public.data_collector_to_device OWNER TO postgres;
-
---
--- TOC entry 325 (class 1259 OID 19528)
--- Name: data_collector_to_device_session; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.data_collector_to_device_session (
-    data_collector_id bigint NOT NULL,
-    device_session_id bigint NOT NULL
-);
-
-
-ALTER TABLE public.data_collector_to_device_session OWNER TO postgres;
-
---
--- TOC entry 402 (class 1259 OID 140812)
--- Name: data_collector_to_gateway; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.data_collector_to_gateway (
-    data_collector_id bigint NOT NULL,
-    gateway_id bigint NOT NULL
-);
-
-
-ALTER TABLE public.data_collector_to_gateway OWNER TO postgres;
-
---
--- TOC entry 326 (class 1259 OID 19531)
--- Name: data_collector_type; Type: TABLE; Schema: public; Owner: postgres
---
-
 CREATE TABLE public.data_collector_type (
     id bigint NOT NULL,
     type character varying(30) NOT NULL,
@@ -2410,33 +2366,6 @@ ALTER TABLE ONLY public.data_collector
 
 
 --
--- TOC entry 4168 (class 2606 OID 19670)
--- Name: data_collector_to_device data_collector_to_device_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.data_collector_to_device
-    ADD CONSTRAINT data_collector_to_device_pkey PRIMARY KEY (data_collector_id, device_id);
-
-
---
--- TOC entry 4170 (class 2606 OID 19672)
--- Name: data_collector_to_device_session data_collector_to_device_session_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.data_collector_to_device_session
-    ADD CONSTRAINT data_collector_to_device_session_pkey PRIMARY KEY (data_collector_id, device_session_id);
-
-
---
--- TOC entry 4276 (class 2606 OID 140816)
--- Name: data_collector_to_gateway data_collector_to_gateway_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.data_collector_to_gateway
-    ADD CONSTRAINT data_collector_to_gateway_pk PRIMARY KEY (data_collector_id, gateway_id);
-
-
---
 -- TOC entry 4173 (class 2606 OID 19674)
 -- Name: data_collector_type data_collector_type_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
@@ -2856,27 +2785,11 @@ CREATE INDEX data_collector_log_event_data_collector_id_multiidx ON public.data_
 
 
 --
--- TOC entry 4274 (class 1259 OID 140827)
--- Name: data_collector_to_gateway_data_collector_id_idx; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE UNIQUE INDEX data_collector_to_gateway_data_collector_id_idx ON public.data_collector_to_gateway USING btree (data_collector_id, gateway_id);
-
-
---
 -- TOC entry 4185 (class 1259 OID 21693)
 -- Name: dc_devaddr_index; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE UNIQUE INDEX dc_devaddr_index ON public.device_session USING btree (dev_addr, id);
-
-
---
--- TOC entry 4171 (class 1259 OID 21692)
--- Name: dc_ds_index; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE UNIQUE INDEX dc_ds_index ON public.data_collector_to_device_session USING btree (device_session_id, data_collector_id);
 
 
 --
@@ -3069,60 +2982,6 @@ ALTER TABLE ONLY public.data_collector_log_event
 
 ALTER TABLE ONLY public.data_collector
     ADD CONSTRAINT data_collector_organization_id_fkey FOREIGN KEY (organization_id) REFERENCES public.organization(id);
-
-
---
--- TOC entry 4289 (class 2606 OID 19787)
--- Name: data_collector_to_device data_collector_to_device_data_collector_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.data_collector_to_device
-    ADD CONSTRAINT data_collector_to_device_data_collector_id_fkey FOREIGN KEY (data_collector_id) REFERENCES public.data_collector(id);
-
-
---
--- TOC entry 4290 (class 2606 OID 79443)
--- Name: data_collector_to_device data_collector_to_device_device_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.data_collector_to_device
-    ADD CONSTRAINT data_collector_to_device_device_id_fkey FOREIGN KEY (device_id) REFERENCES public.device(id) ON DELETE CASCADE;
-
-
---
--- TOC entry 4291 (class 2606 OID 19797)
--- Name: data_collector_to_device_session data_collector_to_device_session_data_collector_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.data_collector_to_device_session
-    ADD CONSTRAINT data_collector_to_device_session_data_collector_id_fkey FOREIGN KEY (data_collector_id) REFERENCES public.data_collector(id);
-
-
---
--- TOC entry 4292 (class 2606 OID 79535)
--- Name: data_collector_to_device_session data_collector_to_device_session_device_session_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.data_collector_to_device_session
-    ADD CONSTRAINT data_collector_to_device_session_device_session_id_fkey FOREIGN KEY (device_session_id) REFERENCES public.device_session(id) ON DELETE CASCADE;
-
-
---
--- TOC entry 4354 (class 2606 OID 140817)
--- Name: data_collector_to_gateway data_collector_to_gateway_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.data_collector_to_gateway
-    ADD CONSTRAINT data_collector_to_gateway_fk FOREIGN KEY (data_collector_id) REFERENCES public.data_collector(id);
-
-
---
--- TOC entry 4355 (class 2606 OID 140822)
--- Name: data_collector_to_gateway data_collector_to_gateway_fk_1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.data_collector_to_gateway
-    ADD CONSTRAINT data_collector_to_gateway_fk_1 FOREIGN KEY (gateway_id) REFERENCES public.gateway(id);
 
 
 --
@@ -3709,3 +3568,10 @@ ALTER TABLE public.gateway ADD npackets_down int8 NOT NULL DEFAULT 0;
 
 -- Convert last_activity column in resource_usage to timestamptz
 ALTER TABLE public.gateway ALTER COLUMN last_activity TYPE timestamptz(0) USING last_activity::timestamptz;
+
+
+ALTER TABLE public.device ADD data_collector_id int8 NULL;
+ALTER TABLE public.device ADD CONSTRAINT device_data_collector_id_fk FOREIGN KEY (data_collector_id) REFERENCES public.data_collector(id);
+
+ALTER TABLE public.device_session ADD data_collector_id int8 NOT NULL;
+ALTER TABLE public.device_session ADD CONSTRAINT device_session_fk FOREIGN KEY (data_collector_id) REFERENCES public.data_collector(id);
