@@ -914,24 +914,6 @@ ALTER TABLE public.device_session_id_seq OWNER TO postgres;
 ALTER SEQUENCE public.device_session_id_seq OWNED BY public.device_session.id;
 
 
---
--- TOC entry 336 (class 1259 OID 19561)
--- Name: device_to_organization; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.device_to_organization (
-    device_id bigint NOT NULL,
-    organization_id bigint NOT NULL
-);
-
-
-ALTER TABLE public.device_to_organization OWNER TO postgres;
-
---
--- TOC entry 337 (class 1259 OID 19564)
--- Name: gateway; Type: TABLE; Schema: public; Owner: postgres
---
-
 CREATE TABLE public.gateway (
     id bigint NOT NULL,
     gw_hex_id character varying(16),
@@ -2428,14 +2410,6 @@ ALTER TABLE ONLY public.device_session
     ADD CONSTRAINT device_session_pkey PRIMARY KEY (id);
 
 
---
--- TOC entry 4189 (class 2606 OID 19688)
--- Name: device_to_organization device_to_organization_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.device_to_organization
-    ADD CONSTRAINT device_to_organization_pkey PRIMARY KEY (device_id, organization_id);
-
 
 --
 -- TOC entry 4191 (class 2606 OID 19690)
@@ -3084,24 +3058,6 @@ ALTER TABLE ONLY public.device_session
 
 
 --
--- TOC entry 4305 (class 2606 OID 79429)
--- Name: device_to_organization device_to_organization_device_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.device_to_organization
-    ADD CONSTRAINT device_to_organization_device_id_fkey FOREIGN KEY (device_id) REFERENCES public.device(id) ON DELETE CASCADE;
-
-
---
--- TOC entry 4304 (class 2606 OID 19882)
--- Name: device_to_organization device_to_organization_organization_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.device_to_organization
-    ADD CONSTRAINT device_to_organization_organization_id_fkey FOREIGN KEY (organization_id) REFERENCES public.organization(id);
-
-
---
 -- TOC entry 4306 (class 2606 OID 19892)
 -- Name: gateway gateway_organization_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
@@ -3570,6 +3526,7 @@ ALTER TABLE public.gateway ADD npackets_down int8 NOT NULL DEFAULT 0;
 ALTER TABLE public.gateway ALTER COLUMN last_activity TYPE timestamptz(0) USING last_activity::timestamptz;
 
 
+-- Delete data-collector association tables
 ALTER TABLE public.device ADD data_collector_id int8 NULL;
 ALTER TABLE public.device ADD CONSTRAINT device_data_collector_id_fk FOREIGN KEY (data_collector_id) REFERENCES public.data_collector(id);
 
