@@ -34656,10 +34656,10 @@ INSERT INTO public.notification_asset_importance (user_id, high, medium, low) VA
 -- Feature/alert_trying_to_connect
 INSERT INTO public.alert_type (code,name,message,risk,description,parameters,technical_description,recommended_action,quarantine_timeout) VALUES 
 ('LAF-404',
- 'Device fails trying to connect',
+ 'Device failed to join',
  'The device {dev_eui} (device name: {dev_name}, device vendor: {dev_vendor})  {app_name} Message ID received {packet_id} on {packet_date} from gateway {gateway} (gateway name: {gw_name}, gw_vendor: {gw_vendor}. Alert generated on {created_at}.',
  'LOW',
- 'A unknown device is sending many join requests but it is not connecting to any network.',
+ 'Device is sending many join requests but it is not joining to the network.',
  '{"max_join_request_fails": {"type": "Float", "default": 10, "maximum": 1000000, "minimum": 2, "description": "Max number of join requests sent by a device without getting to connect to any network" }}',
  'A device has sent many join requests without being able to connect to any network.','Check if device belongs to your LoRaWAN network.',
  1209600)
