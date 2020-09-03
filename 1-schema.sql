@@ -3532,3 +3532,6 @@ ALTER TABLE public.device ADD CONSTRAINT device_data_collector_id_fk FOREIGN KEY
 
 ALTER TABLE public.device_session ADD data_collector_id int8 NOT NULL;
 ALTER TABLE public.device_session ADD CONSTRAINT device_session_fk FOREIGN KEY (data_collector_id) REFERENCES public.data_collector(id);
+
+-- last_packet_id column in gateways
+ALTER TABLE public.gateway ADD last_packet_id bigint NULL;
