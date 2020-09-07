@@ -3518,6 +3518,9 @@ ALTER TABLE public.device ADD npackets_up int8 NOT NULL DEFAULT 0;
 ALTER TABLE public.device ADD npackets_down int8 NOT NULL DEFAULT 0;
 ALTER TABLE public.device ADD npackets_lost float8 NOT NULL DEFAULT 0;
 ALTER TABLE public.device ADD max_rssi float8 NULL;
+ALTER TABLE public.device ADD max_lsnr float8 NULL;
+ALTER TABLE public.device ADD ngateways_connected_to int8 NOT NULL DEFAULT 0;
+ALTER TABLE public.device ADD payload_size int8 NULL;
 
 ALTER TABLE public.gateway ADD npackets_up int8 NOT NULL DEFAULT 0;
 ALTER TABLE public.gateway ADD npackets_down int8 NOT NULL DEFAULT 0;
