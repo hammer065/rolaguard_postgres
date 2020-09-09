@@ -34668,3 +34668,27 @@ INSERT INTO public.alert_type (code,name,message,risk,description,parameters,tec
 -- Add automatic problem solved issue resolution reason
 INSERT INTO public.quarantine_resolution_reason (id, type, name, description) VALUES
 (0, 'AUTOMATIC'::quarantineresolutionreasontype, 'Problem solved', 'The quarantine was removed since the vulnerability was solved.');
+
+-- Feature/alert_laf_102
+INSERT INTO public.alert_type (code,name,message,risk,description,parameters,technical_description,recommended_action,quarantine_timeout) VALUES 
+('LAF-102',
+'Device signal to noise ratio below threshold',
+'The device {dev_eui} (device name: {dev_name}, device vendor: {dev_vendor}) has joined the network. 
+Application: {join_eui} There are {number_of_devices} devices connected in this data collector.
+Message ID received {packet_id} on {packet_date} from gateway {gateway} (gateway name: {gw_name}, gw_vendor: {gw_vendor}. 
+{rssi} Alert generated on {created_at}.',
+'LOW',
+'A packet from this device was received with a signal to noise ratio below the threshold set in the policy.',
+'{
+   "minimum_lsnr":{
+      "type":"Float",
+      "default": -15,
+      "maximum": 10,
+      "minimum": -20,
+      "description":"Minimum LSNR accepted, if the signal to noise ratio is lower an alert is emitted."
+   }
+}',
+'The signal to noise ratio of the device is too low, this can cause packet losing, duplicate packets and faster battery draining.',
+'Try to get the device and the gateway closer. If this is not possible, consider adding another gateway to increase the coverage. You should
+also consider removing any interferences between this two points',
+3600)
