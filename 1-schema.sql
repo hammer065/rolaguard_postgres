@@ -3538,3 +3538,6 @@ ALTER TABLE public.device_session ADD CONSTRAINT device_session_fk FOREIGN KEY (
 
 -- last_packet_id column in gateways
 ALTER TABLE public.gateway ADD last_packet_id bigint NULL;
+
+-- pending_first_connection column on device
+ALTER TABLE public.device ADD pending_first_connection boolean NOT NULL DEFAULT FALSE;
