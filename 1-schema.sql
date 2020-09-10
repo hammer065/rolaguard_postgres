@@ -3541,3 +3541,6 @@ ALTER TABLE public.gateway ADD last_packet_id bigint NULL;
 
 -- pending_first_connection column on device
 ALTER TABLE public.device ADD pending_first_connection boolean NOT NULL DEFAULT FALSE;
+
+-- Add last_packets_list column to device table
+ALTER TABLE public.device ADD last_packets_list varchar(1024) NOT NULL DEFAULT '[]';
