@@ -3544,3 +3544,8 @@ ALTER TABLE public.device ADD pending_first_connection boolean NOT NULL DEFAULT 
 
 -- Add last_packets_list column to device table
 ALTER TABLE public.device ADD last_packets_list varchar(1024) NOT NULL DEFAULT '[]';
+
+-- Fix/issues_timezone
+ALTER TABLE public.quarantine ALTER COLUMN since TYPE timestamp with time zone;
+ALTER TABLE public.quarantine ALTER COLUMN resolved_at type timestamp with time zone;
+ALTER TABLE public.quarantine ALTER COLUMN last_checked type timestamp with time zone;
