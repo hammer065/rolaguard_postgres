@@ -34691,4 +34691,20 @@ Message ID received {packet_id} on {packet_date} from gateway {gateway} (gateway
 'The signal to noise ratio of the device is too low, this can cause packet losing, duplicate packets and faster battery draining.',
 'Try to get the device and the gateway closer. If this is not possible, consider adding another gateway to increase the coverage. You should
 also consider removing any interferences between this two points',
-3600)
+3600);
+
+-- Update existing alert_types to set the correspondig for_asset_type value to each of them
+UPDATE public.alert_type
+SET for_asset_type = 'DEVICE'
+WHERE code in ('LAF-001', 'LAF-002', 'LAF-006', 'LAF-007', 'LAF-009', 'LAF-011',
+                'LAF-100', 'LAF-101', 'LAF-102',
+                'LAF-400', 'LAF-401', 'LAF-404',
+                'LAF-500', 'LAF-501', 'LAF-503');
+
+UPDATE public.alert_type
+SET for_asset_type = 'GATEWAY'
+WHERE code in ('LAF-010', 'LAF-402', 'LAF-403');
+
+UPDATE public.alert_type
+SET for_asset_type = 'LOOK_IN_ALERT_PARAMS'
+WHERE code in ('LAF-600', 'LAF-601');
