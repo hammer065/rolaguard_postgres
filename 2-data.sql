@@ -34666,8 +34666,11 @@ INSERT INTO public.alert_type (code,name,message,risk,description,parameters,tec
 ;
 
 -- Add automatic problem solved issue resolution reason
-INSERT INTO public.quarantine_resolution_reason (id, type, name, description) VALUES
-(0, 'AUTOMATIC'::quarantineresolutionreasontype, 'Problem solved', 'The quarantine was removed since the vulnerability was solved.');
+INSERT INTO public.quarantine_resolution_reason (id, "type","name",description) VALUES 
+(1, 'MANUAL','Manual','Manually resolved quarantine'),
+(2, 'AUTOMATIC','Timeout','Enough time has passed without alerts'),
+(3, 'AUTOMATIC','Correct','Checks passed'),
+(0, 'AUTOMATIC','Problem solved','The quarantine was removed since the vulnerability was solved.');
 
 -- Feature/alert_laf_102
 INSERT INTO public.alert_type (code,name,message,risk,description,parameters,technical_description,recommended_action,quarantine_timeout) VALUES 
