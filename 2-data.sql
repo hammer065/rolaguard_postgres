@@ -34711,3 +34711,39 @@ WHERE code in ('LAF-010', 'LAF-402', 'LAF-403');
 UPDATE public.alert_type
 SET for_asset_type = 'LOOK_IN_ALERT_PARAMS'
 WHERE code in ('LAF-600', 'LAF-601');
+
+--  Update threshold for Gateway changed location, and add description for the parameter
+update policy_item set parameters = '{"location_accuracy": 50}' where alert_type_code = 'LAF-010';
+update alert_type set parameters = '{"location_accuracy": {"type": "Float", "default": 50, "maximum": 1000000, "minimum": 0, "description": "Meter-measured. Gateway''s movements that are greater than this value cause an alert to be raised." }}' where code = 'LAF-010';
+
+-- Delete device_id and device_session_id for gateways' alerts/issues
+UPDATE alert
+SET    device_id = NULL,
+       device_session_id = NULL
+WHERE  type IN ( 'LAF-010', 'LAF-402', 'LAF-403' )
+       AND ( device_id is NOT NULL
+              OR device_session_id IS NOT NULL );
+                                                                                     
+UPDATE quarantine
+SET    device_id = NULL,
+       device_session_id = NULL
+WHERE  quarantine.id IN (SELECT quarantine.id
+                         FROM   quarantine
+                                INNER JOIN alert
+                                        ON quarantine.alert_id = alert.id
+                         WHERE  alert."type" IN ( 'LAF-010', 'LAF-402',
+                                                  'LAF-403' )
+                                AND ( quarantine.device_id IS NOT NULL
+                                       OR quarantine.device_session_id IS NOT NULL )
+                                       order by quarantine.since desc
+                        );
+
+-- Add min_activity_period parameter for connection lost alerts (gateway's and device's)
+-- Device
+update alert_type SET parameters = '{"disconnection_sensitivity": {"type":"Float","default":0.05,"maximum":1.0,"minimum":0.00001,"description":"Used when deciding whether to mark a device as disconnected or not. A device will become disconnected when the inactivity time becomes greater than (1/disconnection_sensitivity) times it usual period between up packages"},
+"min_activity_period": {"type":"Float","default":1800,"maximum":7200,"description":"Used as disconnection threshold when (1/disconnection_sensitivity) times the estimated frequency is lower than this value"}}' 
+where code = 'LAF-401';
+-- Gateway
+update alert_type set parameters = '{"disconnection_sensitivity": {"type":"Float","default":0.05,"maximum":1.0,"minimum":0.00001,"description":"Used when deciding whether to mark a gateway as disconnected or not. A gateway will become disconnected when the inactivity time becomes greater than (1/disconnection_sensitivity) times it usual period between up packages"},
+"min_activity_period": {"type":"Float","default":1800,"maximum":7200,"description":"Used as disconnection threshold when (1/disconnection_sensitivity) times the estimated frequency is lower than this value"}}'
+where code = 'LAF-403';
