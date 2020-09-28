@@ -34738,10 +34738,11 @@ WHERE  quarantine.id IN (SELECT quarantine.id
                                        order by quarantine.since desc
                         );
 
--- Add min_activity_period parameter for connection lost alerts (gateway's and device's)
+-- Add min_activity_period and deviation_tolerance parameters for connection lost alerts (gateway's and device's)
 -- Device
 update alert_type SET parameters = '{"disconnection_sensitivity": {"type":"Float","default":0.05,"maximum":1.0,"minimum":0.00001,"description":"Used when deciding whether to mark a device as disconnected or not. A device will become disconnected when the inactivity time becomes greater than (1/disconnection_sensitivity) times it usual period between up packages"},
-"min_activity_period": {"type":"Float","default":1800,"maximum":7200,"description":"Used as disconnection threshold when (1/disconnection_sensitivity) times the estimated frequency is lower than this value"}}' 
+"min_activity_period": {"type":"Float","default":1800,"maximum":7200,"description":"Used as disconnection threshold when (1/disconnection_sensitivity) times the estimated frequency is lower than this value"},
+"deviation_tolerance": {"type":"Float","default":0.20,"maximum":1.00,"minimum":0.00,"description":"Used to decide whether to raise an alert or not when a device is marked as disconnected. The status (connected/disconnected) of a device depends on its mean period between messages and its inactivity time, therefore this alert may not be useful for irregular devices. Then, an alert will only be raised for devices that sends messages with a coefficient of deviation (standard_deviation/mean) not higher than the value of this parameter"}}' 
 where code = 'LAF-401';
 -- Gateway
 update alert_type set parameters = '{"disconnection_sensitivity": {"type":"Float","default":0.05,"maximum":1.0,"minimum":0.00001,"description":"Used when deciding whether to mark a gateway as disconnected or not. A gateway will become disconnected when the inactivity time becomes greater than (1/disconnection_sensitivity) times it usual period between up packages"},

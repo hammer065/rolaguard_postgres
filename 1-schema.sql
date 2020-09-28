@@ -3555,3 +3555,6 @@ CREATE TYPE public.alert_asset_type AS ENUM ('DEVICE', 'GATEWAY', 'BOTH', 'NONE'
 
 -- Add for_asset_type column to alert_type table
 ALTER TABLE public.alert_type ADD for_asset_type public.alert_asset_type NOT NULL DEFAULT 'BOTH';
+
+-- Add activity_freq_variance column for devices
+ALTER TABLE public.device ADD activity_freq_variance float8 NOT NULL DEFAULT 0;
