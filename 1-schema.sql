@@ -3562,3 +3562,28 @@ ALTER TABLE public.device ADD activity_freq_variance float8 NOT NULL DEFAULT 0;
 -- Save first activity of the assets
 ALTER TABLE public.device ADD first_activity timestamptz(0) NULL;
 ALTER TABLE public.gateway ADD first_activity timestamptz(0) NULL;
+
+-- Create counter_type enum
+CREATE TYPE public.counter_type AS ENUM ('PACKETS_UP', 'PACKETS_DOWN', 'PACKETS_LOST', 'JOIN_REQUESTS', 'FAILED_JOIN_REQUESTS', 'RETRANSMISSIONS');
+
+-- Create device_counters table
+CREATE TABLE public.device_counters (
+	device_id bigint NOT NULL,
+    counter_type public.counter_type NOT NULL,
+    hour_of_day int NOT NULL,
+    value bigint NOT NULL DEFAULT 0,
+    last_update timestamp with time zone NOT NULL,
+    CONSTRAINT device_counters_fk_1 FOREIGN KEY (device_id) REFERENCES public.device(id),
+    CONSTRAINT device_counters_pkey PRIMARY KEY (device_id, counter_type, hour_of_day)
+);
+
+-- Create gateway_counters table
+CREATE TABLE public.gateway_counters (
+	gateway_id bigint NOT NULL,
+    counter_type public.counter_type NOT NULL,
+    hour_of_day int NOT NULL,
+    value bigint NOT NULL DEFAULT 0,
+    last_update timestamp with time zone NOT NULL,
+    CONSTRAINT gateway_counters_fk_1 FOREIGN KEY (gateway_id) REFERENCES public.gateway(id),
+    CONSTRAINT gateway_counters_pkey PRIMARY KEY (gateway_id, counter_type, hour_of_day)
+);
