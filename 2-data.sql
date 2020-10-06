@@ -34850,3 +34850,33 @@ SET    description =
 technical_description =
 'The signal to noise ratio of the device is too low, this can cause message losing, duplicate messages and faster battery draining.'
 WHERE  code = 'LAF-102';
+
+
+-- Updated alerts LAF-007, LAF-011 and LAF-006
+
+UPDATE public.alert_type
+SET code='LAF-006', "name"='Possible ABP device', message='DevAddr {dev_addr} with DevEUI {dev_eui} counter was reset (device name: {dev_name}, device vendor: {dev_vendor}). Previous counter was {counter} and received {new_counter}. Application: {join_eui} {app_name}. Previous message {prev_packet_id}, current message {packet_id} received on {packet_date} from gateway ID {gateway}, gateway name: {gw_name}, gateway vendor: {gw_vendor}).
+Alert generated on {created_at}.', risk='HIGH', description='If the counter was reset (came back to 0), the DevAddr is kept the same, and no previous Join process was detected, may imply that the device is Activated By Personalization (ABP), which is discouraged for security reasons.
+
+Another posibility is that the device have reseted the counter intentionally or be malfunctioning.
+
+LoRaWAN network servers usually reject messages with lower counters but this validation can  be disabled at the network server.
+', parameters='{}', technical_description='ABP devices implies that session keys are never changed in the whole lifecycle of the device. A device that does not change its session keys is prone to different attacks such as eaveasdrop or replay.', recommended_action='All activated by personalization (ABP) devices should be replaced for over the air activated (OTAA) devices if possible.', quarantine_timeout=604800, for_asset_type='DEVICE'
+where code = 'LAF-006';
+
+UPDATE public.alert_type
+SET code='LAF-011', "name"='Device not re-generating session keys', message='DevAddr {dev_addr} with DevEUI {dev_eui} (device name: {dev_name}, device vendor: {dev_vendor}) counter was reset. Previous counter was {counter} and received {new_counter}. This device is not rejoining after counter overflow. Previous message {prev_packet_id}, current message {packet_id} received on {packet_date} from gateway ID {gateway} (gateway name: {gw_name}, gateway vendor: {gw_vendor}).
+Alert generated on {created_at}.', risk='HIGH', description='If the device was identified as OTAA, the counter was reset (came back to 0), the DevAddr is kept the same, and no previous Join was detected, it may imply that the device is not going through a re-join process when its counter is overflowed (from 65535 to 0).
+
+Another posibility is that the device have reseted the counter intentionally or be malfunctioning.
+
+LoRaWAN network servers usually reject messages with lower counters but this validation can  be disabled at the network server. ', parameters='{}', technical_description='If sessions keys are not renewed, the device is exposed to eavesdropping attacks.', recommended_action='Force the device to start a Join process when its counter is overflowed.', quarantine_timeout=604800, for_asset_type='DEVICE'
+where code = 'LAF-011';
+
+UPDATE public.alert_type
+SET code='LAF-007', "name"='Possible duplicated sessions', message='Received smaller counter than expected for DevAddr {dev_addr} with DevEUI {dev_eui} (device name: {dev_name}, device vendor: {dev_vendor}). Application: {join_eui} {app_name}. Previous counter was {counter} and current {new_counter}. Previous message {prev_packet_id}, current message {packet_id} received on {packet_date} from gateway ID {gateway} (gateway name: {gw_name}, gateway vendor: {gw_vendor}).
+Alert generated on {created_at}.', risk='MEDIUM', description='Was received a message with a lower counter than expected. It may imply that the device is malfunctioning, or that an attacker has generated valid session keys and is sending data messages with an arbitrary payload.
+
+LoRaWAN network servers usually reject messages with lower counters but this validation could be disabled at the network server.
+', parameters='{}', technical_description='If an attacker obtains a pair of session keys (for having stolen the AppKey in OTAA devices or the AppSKey/NwkSKey in ABP devices), he/she would be able to send fake data to the server. For the server to accept spoofed messages, it is required for the FCnt (Frame Counter) of the message to be higher than the FCnt of the last message sent. In an scenario where the original spoofed device keeps sending messages, the server would start to discard (valid) messages since they would have a smaller FCnt. Hence, when messages with a smaller FCnt value than expected by the lorawan server are being received, it is possible to infer that a parallel session was established.', recommended_action='If the device is over the air activated (OTAA), change its AppKey because it was probably compromised. If it is activated by personalization, change its AppSKey and NwkSKey. Moreover, make sure that the lorawan server is updated and it is not accepting duplicated messages.', quarantine_timeout=86400, for_asset_type='DEVICE'
+where code = 'LAF-007';
