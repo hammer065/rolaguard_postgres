@@ -34880,3 +34880,29 @@ Alert generated on {created_at}.', risk='MEDIUM', description='Was received a me
 LoRaWAN network servers usually reject messages with lower counters but this validation could be disabled at the network server.
 ', parameters='{}', technical_description='If an attacker obtains a pair of session keys (for having stolen the AppKey in OTAA devices or the AppSKey/NwkSKey in ABP devices), he/she would be able to send fake data to the server. For the server to accept spoofed messages, it is required for the FCnt (Frame Counter) of the message to be higher than the FCnt of the last message sent. In an scenario where the original spoofed device keeps sending messages, the server would start to discard (valid) messages since they would have a smaller FCnt. Hence, when messages with a smaller FCnt value than expected by the lorawan server are being received, it is possible to infer that a parallel session was established.', recommended_action='If the device is over the air activated (OTAA), change its AppKey because it was probably compromised. If it is activated by personalization, change its AppSKey and NwkSKey. Moreover, make sure that the lorawan server is updated and it is not accepting duplicated messages.', quarantine_timeout=86400, for_asset_type='DEVICE'
 where code = 'LAF-007';
+
+-- Feature/LAF-103
+INSERT INTO alert_type
+            (code,
+             "name",
+             message,
+             risk,
+             description,
+             parameters,
+             technical_description,
+             recommended_action,
+             quarantine_timeout,
+             for_asset_type)
+VALUES      ('LAF-103',
+             'Too many retransmissions by device',
+             'The device {dev_eui} (device name: {dev_name}, device vendor: {dev_vendor}) is sending the same message too many times.  Application: {join_eui} {app_name}. Alert generated on {created_at}.',
+             'MEDIUM',
+'The device is retransmitting too many messages, according to threshold set in policy'
+             ,
+'{"max_retransmissions":  {"type":"Integer","default":10,"maximum":1000000,"minimum":0,"description":"Represents a threshold of allowed retransmissions in a certain period of time. If a number or retransmissions that is higher than this value was detected in the last (time_window) hours, an alert will be raised"}, "time_window": {"type":"Integer","default":24,"maximum":24,"minimum":0, "description":"Represents the amount of time that is taken into account when deciding if the number of retransmissions by device should raise an alert. Measured in hours, can take a maximum value of 24, representing a time window of a day"}}'
+             ,
+'The device is retransmitting the same message too many times because it doesn''t receive the confirmations from LoRaWAN Network Server. This can lead to increased device''s battery consumption and data not being received by the application.'
+             ,
+'Check that the acknowledgment message from LoRaWAN Network Server is being received, and that the device is not malfunctioning.',
+86400,
+'DEVICE')  
