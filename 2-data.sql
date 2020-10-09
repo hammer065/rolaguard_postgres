@@ -34906,3 +34906,10 @@ VALUES      ('LAF-103',
 'Check that the acknowledgment message from LoRaWAN Network Server is being received, and that the device is not malfunctioning.',
 86400,
 'DEVICE')  
+
+-- Feature/LAF-101
+UPDATE alert_type
+SET    "name" = 'Many messages from device are being lost',
+       parameters =
+'{"max_lost_packets": {"type": "Integer", "default": 360, "maximum": 10000000, "minimum": 0, "description": "Represents a threshold of allowed lost packets in a certain period of time. If a number or lost packets that is higher than this value was detected in the last (time_window) hours, an alert will be raised"}, "time_window": {"type":"Integer","default":24,"maximum":24,"minimum":1, "description":"Represents the amount of time that is taken into account when deciding if the number of lost packets by device should raise an alert. Measured in hours, can take a maximum value of 24, representing a time window of a day"}}'
+WHERE  code = 'LAF-101';
