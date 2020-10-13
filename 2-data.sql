@@ -34899,7 +34899,7 @@ VALUES      ('LAF-103',
              'MEDIUM',
 'The device is retransmitting too many messages, according to threshold set in policy'
              ,
-'{"max_retransmissions":  {"type":"Integer","default":10,"maximum":1000000,"minimum":0,"description":"Represents a threshold of allowed retransmissions in a certain period of time. If a number or retransmissions that is higher than this value was detected in the last (time_window) hours, an alert will be raised"}, "time_window": {"type":"Integer","default":24,"maximum":24,"minimum":0, "description":"Represents the amount of time that is taken into account when deciding if the number of retransmissions by device should raise an alert. Measured in hours, can take a maximum value of 24, representing a time window of a day"}}'
+'{"max_retransmissions":  {"type":"Integer","default":10,"maximum":1000000,"minimum":0,"description":"Represents a threshold of allowed retransmissions in a certain period of time. If a number or retransmissions that is higher than this value was detected in the last (time_window) hours, an alert will be raised"}, "time_window": {"type":"Integer","default":24,"maximum":24,"minimum":1, "description":"Represents the amount of time that is taken into account when deciding if the number of retransmissions by device should raise an alert. Measured in hours, can take a maximum value of 24, representing a time window of a day"}}'
              ,
 'The device is retransmitting the same message too many times because it doesn''t receive the confirmations from LoRaWAN Network Server. This can lead to increased device''s battery consumption and data not being received by the application.'
              ,
