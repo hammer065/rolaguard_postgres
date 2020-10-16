@@ -34913,3 +34913,9 @@ SET    "name" = 'Many messages from device are being lost',
        parameters =
 '{"max_lost_packets": {"type": "Integer", "default": 360, "maximum": 10000000, "minimum": 0, "description": "Represents a threshold of allowed lost packets in a certain period of time. If a number or lost packets that is higher than this value was detected in the last (time_window) hours, an alert will be raised"}, "time_window": {"type":"Integer","default":24,"maximum":24,"minimum":1, "description":"Represents the amount of time that is taken into account when deciding if the number of lost packets by device should raise an alert. Measured in hours, can take a maximum value of 24, representing a time window of a day"}}'
 WHERE  code = 'LAF-101';
+
+-- Feature/LAF-600 - Add resolution_reason to message and delete second sentence on technical description
+UPDATE public.alert_type
+SET technical_description = 'The issue is considered solved since a considerable time has passed since the last alert was emitted.',
+    message = '{alert_solved} {alert_description} {dev_eui} (device name: {dev_name}, device vendor: {dev_vendor}) {date} {resolution_reason}'
+WHERE code = 'LAF-600';
