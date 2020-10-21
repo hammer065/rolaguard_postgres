@@ -34916,6 +34916,6 @@ WHERE  code = 'LAF-101';
 
 -- Feature/LAF-600 - Add resolution_reason to message and delete second sentence on technical description
 UPDATE public.alert_type
-SET technical_description = 'The issue is considered solved since a considerable time has passed since the last alert was emitted.',
+SET technical_description = 'The problem is considered resolved, see the Resolution reason for more details.'
     message = '{alert_solved} {alert_description} {dev_eui} (device name: {dev_name}, device vendor: {dev_vendor}) {date} {resolution_reason}'
 WHERE code = 'LAF-600';
