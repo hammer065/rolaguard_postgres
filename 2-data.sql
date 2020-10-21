@@ -34905,7 +34905,7 @@ VALUES      ('LAF-103',
              ,
 'Check that the acknowledgment message from LoRaWAN Network Server is being received, and that the device is not malfunctioning.',
 86400,
-'DEVICE')  
+'DEVICE');
 
 -- Feature/LAF-101
 UPDATE alert_type
