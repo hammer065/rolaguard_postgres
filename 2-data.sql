@@ -520,7 +520,7 @@ UPDATE public.alert_type
 	SET parameters='{
 	"minimum_rssi": {
 		"type": "Float",
-		"default": -120,
+		"default": -125,
 		"maximum": 0,
 		"minimum": -132,
 		"description": "Minimum RSSI accepted, if the signal strength is lower an alert is emitted."
