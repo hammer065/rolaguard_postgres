@@ -511,3 +511,71 @@ UPDATE public.alert_type
 SET technical_description = 'The problem is considered resolved, see the Resolution reason for more details.',
     message = '{alert_solved} {alert_description} {dev_eui} (device name: {dev_name}, device vendor: {dev_vendor}) {date} {resolution_reason}'
 WHERE code = 'LAF-600';
+
+
+
+-- Added moving average weight to policies
+
+UPDATE public.alert_type
+	SET parameters='{
+	"minimum_rssi": {
+		"type": "Float",
+		"default": -120,
+		"maximum": 0,
+		"minimum": -132,
+		"description": "Minimum RSSI accepted, if the signal strength is lower an alert is emitted."
+		},
+	"moving_average_weight": {
+	"type": "Float",
+	"default": 0.9,
+	"maximum": 0.99,
+	"minimum": 0.0,
+	"description" : "This value is related to how many packets are averaged to calculate the mean signal intensity. The higher the value, the greater the number of packets considered in the average."
+	}
+}'
+	WHERE code='LAF-100';
+UPDATE public.alert_type
+	SET parameters='{
+   "minimum_lsnr":{
+      "type":"Float",
+      "default": -15,
+      "maximum": 10,
+      "minimum": -20,
+      "description":"Minimum LSNR accepted, if the signal to noise ratio is lower an alert is emitted."
+   }, 
+   "moving_average_weight": {
+   "type": "Float",
+   "default": 0.9,
+   "maximum": 0.99,
+   "minimum": 0.0,
+   "description" : "This value is related to how many packets are averaged to calculate the mean SNR. The higher the value, the greater the number of packets considered in the average."
+   }
+}'
+	WHERE code='LAF-102';
+UPDATE public.alert_type
+	SET parameters='{"disconnection_sensitivity": {"type":"Float","default":0.05,"maximum":1.0,"minimum":0.00001,"description":"Used when deciding whether to mark a device as disconnected or not. A device will become disconnected when the inactivity time becomes greater than (1/disconnection_sensitivity) times it usual period between up packages"},
+"min_activity_period": {"type":"Float","default":1800,"maximum":7200,"description":"Used as disconnection threshold when (1/disconnection_sensitivity) times the estimated frequency is lower than this value"},
+"deviation_tolerance": {"type":"Float","default":0.20,"maximum":1.00,"minimum":0.00,"description":"Used to decide whether to raise an alert or not when a device is marked as disconnected. The status (connected/disconnected) of a device depends on its mean period between messages and its inactivity time, therefore this alert may not be useful for irregular devices. Then, an alert will only be raised for devices that sends messages with a coefficient of deviation (standard_deviation/mean) not higher than the value of this parameter"},
+"moving_average_weight":
+{
+	"type": "Float",
+	"default": 0.9,
+	"maximum": 0.99,
+	"minimum": 0.0,
+	"description" : "This value is related to how many packets are used to estimate the frequency of transmission. The higher the value, the greater the number of packets considered in the average."
+   }
+}'
+	WHERE code='LAF-401';
+UPDATE public.alert_type
+	SET parameters='{"disconnection_sensitivity": {"type":"Float","default":0.05,"maximum":1.0,"minimum":0.00001,"description":"Used when deciding whether to mark a gateway as disconnected or not. A gateway will become disconnected when the inactivity time becomes greater than (1/disconnection_sensitivity) times it usual period between up packages"},
+"min_activity_period": {"type":"Float","default":1800,"maximum":7200,"description":"Used as disconnection threshold when (1/disconnection_sensitivity) times the estimated frequency is lower than this value"},
+"moving_average_weight":
+{
+	"type": "Float",
+	"default": 0.9,
+	"maximum": 0.99,
+	"minimum": 0.0,
+	"description" : "This value is related to how many packets are used to estimate the frequency of transmission. The higher the value, the greater the number of packets considered in the average."
+   }
+}'
+	WHERE code='LAF-403';
