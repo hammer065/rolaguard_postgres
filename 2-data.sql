@@ -579,7 +579,37 @@ UPDATE public.alert_type
    }
 }'
 	WHERE code='LAF-403';
+
 -- Corrected LAF-401 description
 UPDATE public.alert_type
 	SET technical_description='This was determined by not receiving messages from a gateway for a longer period of time than usual.'
 	WHERE code='LAF-401';
+
+-- Update timeouts and number of packets to remove issues
+UPDATE public.alert_type
+	SET quarantine_timeout=86400,quarantine_npackets_timeout=8
+	WHERE id=38;
+UPDATE public.alert_type
+	SET quarantine_timeout=86400,quarantine_npackets_timeout=8
+	WHERE id=18;
+UPDATE public.alert_type
+	SET quarantine_timeout=86400,quarantine_npackets_timeout=8
+	WHERE id=19;
+UPDATE public.alert_type
+	SET quarantine_timeout=604800
+	WHERE id=40;
+UPDATE public.alert_type
+	SET quarantine_timeout=604800
+	WHERE id=23;
+UPDATE public.alert_type
+	SET quarantine_timeout=86400,quarantine_npackets_timeout=8
+	WHERE id=39;
+UPDATE public.alert_type
+	SET quarantine_timeout=86400,quarantine_npackets_timeout=8
+	WHERE id=41;
+UPDATE public.alert_type
+	SET quarantine_timeout=604800
+	WHERE id=24;
+UPDATE public.alert_type
+	SET quarantine_timeout=86400,quarantine_npackets_timeout=8
+	WHERE id=42;

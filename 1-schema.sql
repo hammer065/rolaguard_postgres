@@ -3587,3 +3587,7 @@ CREATE TABLE public.gateway_counters (
     CONSTRAINT gateway_counters_fk_1 FOREIGN KEY (gateway_id) REFERENCES public.gateway(id),
     CONSTRAINT gateway_counters_pkey PRIMARY KEY (gateway_id, counter_type, hour_of_day)
 );
+
+-- Add column with the number of packets to remove an issue
+ALTER TABLE public.alert_type ADD quarantine_npackets_timeout int4 NOT NULL DEFAULT 0;
+
