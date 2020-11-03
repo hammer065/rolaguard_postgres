@@ -579,3 +579,7 @@ UPDATE public.alert_type
    }
 }'
 	WHERE code='LAF-403';
+-- Corrected LAF-401 description
+UPDATE public.alert_type
+	SET technical_description='This was determined by not receiving messages from a gateway for a longer period of time than usual.'
+	WHERE code='LAF-401';
