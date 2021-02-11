@@ -587,6 +587,9 @@ CREATE TABLE public.data_collector (
     ip character varying(120),
     port character varying(120),
     "user" character varying(120),
+    ca_cert TEXT,
+    client_cert TEXT,
+    client_key TEXT,
     password character varying(120),
     ssl boolean,
     organization_id bigint NOT NULL,
@@ -3455,7 +3458,7 @@ CREATE TABLE public.device_tag (
 	tag_id int8 NOT NULL
 );
 
-ALTER TABLE public.device_tag 
+ALTER TABLE public.device_tag
     ADD CONSTRAINT device_tag_pk PRIMARY KEY (device_id,tag_id);
 
 ALTER TABLE ONLY public.device_tag
@@ -3466,14 +3469,14 @@ ALTER TABLE ONLY public.device_tag
 
 ALTER TABLE ONLY public.tag
     ADD CONSTRAINT tag_organization_id_fkey FOREIGN KEY (organization_id) REFERENCES public.organization(id);
-    
+
 
 CREATE TABLE public.gateway_tag (
 	gateway_id int8 NOT NULL,
 	tag_id int8 NOT NULL
 );
 
-ALTER TABLE public.gateway_tag 
+ALTER TABLE public.gateway_tag
     ADD CONSTRAINT gateway_tag_pk PRIMARY KEY (gateway_id,tag_id);
 
 ALTER TABLE ONLY public.gateway_tag
@@ -3590,4 +3593,3 @@ CREATE TABLE public.gateway_counters (
 
 -- Add column with the number of packets to remove an issue
 ALTER TABLE public.alert_type ADD quarantine_npackets_timeout int4 NOT NULL DEFAULT 0;
-
