@@ -594,9 +594,12 @@ CREATE TABLE public.data_collector (
     ssl boolean,
     organization_id bigint NOT NULL,
     deleted_at timestamp with time zone,
+    region_id bigint,
     policy_id bigint,
     status public.datacollectorstatus,
     gateway_id character varying(120),
+    gateway_name character varying(36),
+    gateway_api_key character varying(400),
     verified boolean DEFAULT false
 );
 
@@ -3593,3 +3596,23 @@ CREATE TABLE public.gateway_counters (
 
 -- Add column with the number of packets to remove an issue
 ALTER TABLE public.alert_type ADD quarantine_npackets_timeout int4 NOT NULL DEFAULT 0;
+
+-- Create ttn_region table
+CREATE TABLE public.ttn_region (
+    id bigint NOT NULL,
+    region character varying(30) NOT NULL,
+    name character varying(30) NOT NULL
+);
+
+ALTER TABLE public.ttn_region OWNER TO postgres;
+
+CREATE SEQUENCE public.ttn_region_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+ALTER TABLE public.ttn_region_id_seq OWNER TO postgres;
+
+ALTER SEQUENCE public.ttn_region_id_seq OWNED BY public.ttn_region.id;
