@@ -619,3 +619,5 @@ UPDATE public.alert_type
 UPDATE public.alert_type
 	SET quarantine_timeout=86400,quarantine_npackets_timeout=8
 	WHERE id=42;
+
+INSERT INTO public.notification_type(code) VALUES ('NEW_ALERT');
