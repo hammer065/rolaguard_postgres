@@ -3616,3 +3616,29 @@ CREATE SEQUENCE public.ttn_region_id_seq
 ALTER TABLE public.ttn_region_id_seq OWNER TO postgres;
 
 ALTER SEQUENCE public.ttn_region_id_seq OWNED BY public.ttn_region.id;
+
+CREATE TABLE public.webhook(
+       id BIGINT NOT NULL,
+       webhook_user_id BIGINT NOT NULL,
+       target_url VARCHAR(2000),
+       url_secret VARCHAR(256),
+       active BOOLEAN
+);
+
+ALTER TABLE public.webhook OWNER TO postgres;
+
+CREATE SEQUENCE public.webhook_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+ALTER TABLE public.webhook_id_seq OWNER TO postgres;
+
+ALTER SEQUENCE public.webhook_id_seq OWNED BY public.webhook.id;
+ALTER TABLE ONLY public.webhook ALTER COLUMN id SET DEFAULT nextval('public.webhook_id_seq'::regclass);
+
+ALTER TABLE public.webhook ADD CONSTRAINT webhook_pk PRIMARY KEY (id);
+ALTER TABLE public.webhook ADD CONSTRAINT user_id_fk FOREIGN KEY (webhook_user_id) REFERENCES public.iot_user(id);
+
+ALTER TABLE public.notification_preferences ADD webhook BOOLEAN NOT NULL DEFAULT (FALSE);
