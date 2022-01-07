@@ -4,11 +4,11 @@ insert into public.organization (id, name, country, region) values (4, 'Communit
 
 -- User --
 -- orchestrator -- (user.orchestrator/rolaguard_password)
-insert into public.iot_user (username, email, full_name, password, organization_id, phone, active, deleted, blocked)
-values ('user.orchestrator', 'user_orchestrator@your_host.com', 'Orchestrator User','$2b$12$vyJjHtINa1pMIbIamYo9xOgYKxQ20PvejNAYuQakh2ihBdX84Zqbm', 3, '3431111111', true, false, false);
+insert into public.iot_user (username, email, full_name, password, organization_id, phone, active, deleted, blocked, first_login)
+values ('user.orchestrator', 'user_orchestrator@your_host.com', 'Orchestrator User','$2b$12$vyJjHtINa1pMIbIamYo9xOgYKxQ20PvejNAYuQakh2ihBdX84Zqbm', 3, '+543435555555', true, false, false, true);
 -- admin -- (admin/admin)
-insert into public.iot_user (username, email, full_name, password, organization_id, phone, active, deleted, blocked)
-values ('admin', 'admin@your_host.com', 'Preloaded Admin User','$2b$12$Z5vPo9nm9Lj2fszLoqrxFeSVwNBSWH9RLutm7btRl5MWdhPczUcsa', 4, '3431111111', true, false, false);
+insert into public.iot_user (username, email, full_name, password, organization_id, phone, active, deleted, blocked, first_login)
+values ('admin', 'admin@your_host.com', 'Preloaded Admin User','$2b$12$Z5vPo9nm9Lj2fszLoqrxFeSVwNBSWH9RLutm7btRl5MWdhPczUcsa', 4, '+543435555555', true, false, false, true);
 
 -- User Roles --
 insert into public.user_role(id, role_name)

@@ -1016,7 +1016,8 @@ CREATE TABLE public.iot_user (
     organization_id bigint,
     active boolean NOT NULL,
     deleted boolean NOT NULL,
-    blocked boolean NOT NULL
+    blocked boolean NOT NULL,
+    first_login boolean NOT NULL
 );
 
 
