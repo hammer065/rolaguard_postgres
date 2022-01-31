@@ -3664,3 +3664,11 @@ ALTER TABLE public.webhook ADD CONSTRAINT webhook_pk PRIMARY KEY (id);
 ALTER TABLE public.webhook ADD CONSTRAINT user_id_fk FOREIGN KEY (webhook_user_id) REFERENCES public.iot_user(id);
 
 ALTER TABLE public.notification_preferences ADD webhook BOOLEAN NOT NULL DEFAULT (FALSE);
+
+CREATE TABLE public.data_collector_gateway(
+    gateway_id VARCHAR(120),
+    data_collector_id BIGINT,
+    gateway_name VARCHAR(36),
+    CONSTRAINT data_collecotr_gateway_pk PRIMARY KEY (gateway_id, data_collector_id),
+    CONSTRAINT data_collector_id_fk FOREIGN KEY (data_collector_id) REFERENCES public.data_collector(id)
+);
