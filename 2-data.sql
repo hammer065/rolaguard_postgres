@@ -621,3 +621,5 @@ UPDATE public.alert_type
 	WHERE id=42;
 
 INSERT INTO public.notification_type(code) VALUES ('NEW_ALERT');
+
+DELETE FROM public.data_collector_type WHERE id=2;
