@@ -874,6 +874,7 @@ CREATE TABLE public.device_session (
     reset_counter integer NOT NULL,
     is_confirmed boolean,
     dev_addr character varying(8) NOT NULL,
+    spread_factor character varying(8) DEFAULT '',
 	up_link_counter int4 NOT NULL DEFAULT 0,
 	down_link_counter int4 NOT NULL DEFAULT 0,
 	max_down_counter int4 NOT NULL DEFAULT '-1'::integer,
