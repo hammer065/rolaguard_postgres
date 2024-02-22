@@ -25,9 +25,10 @@ insert into public.user_to_user_role(user_id, user_role_id) values(1, 9);
 insert into public.user_to_user_role(user_id, user_role_id) values(2, 2);
 
 -- Collector Type --
-insert into public.data_collector_type(id, "type", name) values (1, 'chirpstack_collector', 'Collector for ChirpStack.io server');
+insert into public.data_collector_type(id, "type", name) values (1, 'chirpstack_collector', 'Collector for ChirpStack.io v3 server');
 insert into public.data_collector_type(id, "type", name) values (2, 'ttn_collector', 'Collector for The Things Network v2');
 insert into public.data_collector_type(id, "type", name) values (3, 'ttn_v3_collector', 'Collector for The Things Network v3');
+insert into public.data_collector_type(id, "type", name) values (4, 'chirpstack_v4_collector', 'Collector for ChirpStack.io v4 server');
 
 -- TTN Region --
 insert into public.ttn_region(id, "region", name) values (1, 'eu1', 'Europe 1 (eu1)');
